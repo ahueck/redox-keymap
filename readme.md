@@ -1,4 +1,4 @@
-# The ahueck keymap for Redox/rev1  [![Build Status](https://travis-ci.org/ahueck/redox-keymap.svg?branch=master)](https://travis-ci.org/ahueck/redox-keymap)
+# The ahueck keymap for Redox/rev1  [![Build Status](https://travis-ci.com/ahueck/redox-keymap.svg?branch=master)](https://travis-ci.com/ahueck/redox-keymap)
 
 Further information for the keyboard specifics: [Redox repository](https://github.com/mattdibi/redox-keyboard) and [Redox qmk firmware](https://github.com/qmk/qmk_firmware/tree/master/keyboards/redox)
 
