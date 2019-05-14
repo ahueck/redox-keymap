@@ -19,38 +19,56 @@ enum custom_keycodes {
 };
 
 // Tap dance keycodes
-enum tap_dance{
-  TD_SCLN = 0, // ;; -> :
+enum tap_dance {
+  TD_SCLN = 0,  // ;; -> :
   TD_ESC_CAPS
 };
 
 // Semicolon to Colon
-void dance_scln_finished (qk_tap_dance_state_t *state, void *user_data) {
+void dance_scln_finished(qk_tap_dance_state_t* state, void* user_data) {
   if (state->count == 1) {
-    register_code (KC_SCLN);
+    register_code(KC_SCLN);
   } else {
-    register_code (KC_RSFT);
-    register_code (KC_SCLN);
+    register_code(KC_RSFT);
+    register_code(KC_SCLN);
   }
 }
-void dance_scln_reset (qk_tap_dance_state_t *state, void *user_data) {
+void dance_scln_reset(qk_tap_dance_state_t* state, void* user_data) {
   if (state->count == 1) {
-    unregister_code (KC_SCLN);
+    unregister_code(KC_SCLN);
   } else {
-    unregister_code (KC_RSFT);
-    unregister_code (KC_SCLN);
+    unregister_code(KC_RSFT);
+    unregister_code(KC_SCLN);
   }
 }
 
-//Tap Dance Definitions
+// Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_SCLN]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_scln_finished, dance_scln_reset),
-  [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)
+    [TD_SCLN]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_scln_finished, dance_scln_reset),
+    [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)};
+
+// Change LED colors depending on the layer.
+uint32_t layer_state_set_user(uint32_t state) {
+  switch (biton32(state)) {
+    case _SYMB:
+      rgblight_setrgb(RGB_GREEN);
+      break;
+    case _NAV:
+      rgblight_setrgb(RGB_BLUE);
+      break;
+    case _ADJUST:
+      rgblight_setrgb(RGB_RED);
+      break;
+    default:
+      rgblight_disable();
+      break;
+  }
+  return state;
 };
 
 // Shortcut to make keymap more readable
 #define KC_BKSL KC_BSLASH
-#define SYM_L   MO(_SYMB)
+#define SYM_L MO(_SYMB)
 
 #define KC_ALAS LALT_T(KC_PAST)
 #define KC_CTPL LCTL_T(KC_PSLS)
@@ -66,6 +84,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define TDKC_ESC TD(TD_ESC_CAPS)
 #define TDKC_SEM TD(TD_SCLN)
 
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
@@ -125,3 +144,4 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 
 };
+// clang-format on
