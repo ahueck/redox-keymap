@@ -1,0 +1,40 @@
+language: c
+os: linux
+dist: xenial
+sudo: false
+
+addons:
+  apt:
+    packages: &default_dep
+      - gcc-avr 
+      - binutils-avr
+      - avr-libc
+      - dfu-programmer
+      - dfu-util
+      - gcc-arm-none-eabi
+      - binutils-arm-none-eabi
+      - libnewlib-arm-none-eabi
+      - avrdude
+
+before_install:
+  - export DEPENDENCY_DIR="${TRAVIS_BUILD_DIR}/dependency" 
+  - mkdir -p ${DEPENDENCY_DIR}
+  - cd ${DEPENDENCY_DIR}
+
+install:
+  - git clone --recurse-submodules https://github.com/qmk/qmk_firmware.git
+  - cd qmk_firmware/keyboards/redox/keymaps/
+  - git clone https://github.com/$TRAVIS_REPO_SLUG.git ahueck
+  - cd ahueck
+  - git checkout -qf $TRAVIS_COMMIT
+
+before_script:
+  - cd ${DEPENDENCY_DIR}/qmk_firmware
+
+script: 
+  - make redox/rev1:ahueck
+
+branches:
+  only:
+    - master
+    - devel
