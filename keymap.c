@@ -59,16 +59,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 uint32_t layer_state_set_user(uint32_t state) {
   switch (biton32(state)) {
     case _SYMB:
-      rgblight_setrgb(RGB_GREEN);
+      rgblight_sethsv_noeeprom(HSV_GREEN);
+      rgblight_enable_noeeprom();
       break;
     case _NAV:
-      rgblight_setrgb(RGB_BLUE);
+      rgblight_sethsv_noeeprom(HSV_BLUE);
+      rgblight_enable_noeeprom();
       break;
     case _ADJUST:
-      rgblight_setrgb(RGB_RED);
+      rgblight_sethsv_noeeprom(HSV_RED);
+      rgblight_enable_noeeprom();
       break;
     default:
-      rgblight_disable();
+      rgblight_disable_noeeprom();
       break;
   }
   return state;
