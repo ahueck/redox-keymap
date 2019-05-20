@@ -42,11 +42,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_Y_REDO]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_finished_y, dance_reset_y),
     [TD_Z_UNDO]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_finished_z, dance_reset_z)};
 
-
 // Send custom strings
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (record->event.pressed) {
-    switch(keycode) {
+    switch (keycode) {
       case ASC_SAR:
         SEND_STRING("->");
         return false;
@@ -100,17 +99,15 @@ uint32_t layer_state_set_user(uint32_t state) {
 #define TDKC_ZU TD(TD_Z_UNDO)
 
 #define KC_CMDB LGUI_T(KC_GRV)
+#define KC_CTSP LCTL(KC_SPC)
+#define KC_ATAB LALT(KC_TAB)
 
-//#define KC_VOLU KC__VOLUP
-//#define KC_VOLD KC__VOLDOWN
 #define KC_VOLM KC_AUDIO_MUTE
 #define KC_CALC KC_CALCULATOR
 
 #define KC_CTME MT(MOD_LCTL | MOD_LGUI, KC_TILD)
 #define KC_CTSH MT(MOD_LCTL | MOD_LSFT, KC_PMNS)
 #define KC_CTAL MT(MOD_LCTL | MOD_LALT, KC_CIRC)
-
-#define KC_CTSP LCTL(KC_SPC)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -133,13 +130,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______ ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,KC_CTME ,KC_TILD ,KC_HASH ,KC_LPRN ,KC_RPRN ,_______ ,                          _______ ,KC_T    ,KC_HOME ,KC_PGUP ,KC_PGDN ,KC_END  ,XXXXXXX ,
+     _______ ,KC_CTME ,KC_TILD ,KC_HASH ,KC_LPRN ,KC_RPRN ,_______ ,                          _______ ,KC_T    ,KC_HOME ,KC_PGUP ,KC_PGDN ,KC_END  ,KC_ATAB ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,KC_CTSH ,KC_UNDS ,KC_EQL  ,KC_LCBR ,KC_RCBR ,_______ ,                          _______ ,KC_P    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT ,XXXXXXX ,
+     _______ ,KC_CTSH ,KC_UNDS ,KC_EQL  ,KC_LCBR ,KC_RCBR ,_______ ,                          _______ ,KC_P    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT ,KC_TAB  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,KC_CTAL ,KC_AMPR ,KC_ASTR ,KC_LBRC ,KC_RBRC ,_______ ,_______ ,        _______ ,_______ ,KC_CTSP ,ASC_SAR ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______ ,    KC_NAMI ,     KC_VOLU ,KC_VOLD,KC_VOLM ,KC_CALC 
+     _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______ ,    KC_NAMI ,     KC_VOLU ,KC_VOLD ,KC_VOLM ,KC_CALC 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
