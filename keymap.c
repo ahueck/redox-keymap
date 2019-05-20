@@ -80,7 +80,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 #define SYM_L MO(_SYMB)
 
 #define KC_SYSP LT(_SYMB, KC_SPC)   // symbol layer or space
-#define KC_SYBS LT(_SYMB, KC_CTPL)  // symbol layer or backspace
+#define KC_SYBS LT(_SYMB, KC_BSPC)  // symbol layer or backspace
 
 #define KC_ALAS LALT_T(KC_PAST)
 #define KC_CTPL LCTL_T(KC_PSLS)
