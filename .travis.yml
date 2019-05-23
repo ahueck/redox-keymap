@@ -26,6 +26,7 @@ install:
   - cd qmk_firmware/keyboards/redox/keymaps/
   - git clone https://github.com/$TRAVIS_REPO_SLUG.git ahueck
   - cd ahueck
+  - git fetch origin $TRAVIS_COMMIT
   - git checkout -qf $TRAVIS_COMMIT
 
 before_script:

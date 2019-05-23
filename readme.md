@@ -26,7 +26,7 @@ Reset button (pinhole) is on the underside of each half, respectively.
 ### Flash command procedure
     0. Ubuntu 18.10 hard requirement: sudo systemctl stop ModemManager.service
     1. sudo make redox/rev1:*keymap repo name*:avrdude
-    2. hit reset button, when usb decvice detection is active (*Detecting USB port, reset your controller now*)
+    2. hit reset button, when USB device detection is active (*Detecting USB port, reset your controller now*)
     3. repeat for right half of keyboard 
 
 #### Example output (one side)
