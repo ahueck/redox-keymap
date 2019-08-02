@@ -116,8 +116,8 @@ uint32_t layer_state_set_user(uint32_t state) {
 #define KC_CTSH MT(MOD_LCTL | MOD_LSFT, KC_PMNS)
 #define KC_CTAL MT(MOD_LCTL | MOD_LALT, KC_CIRC)
 
-#define KC_UNDO LCTL(z)
-#define KC_REDO LCTL(y)
+#define KC_UNDO LCTL(KC_Z)
+#define KC_REDO LCTL(KC_Y)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
