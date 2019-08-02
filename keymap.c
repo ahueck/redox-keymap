@@ -31,16 +31,17 @@ enum tap_dance {
 // Semicolon to Colon
 AH_SINGLE_TD(scln, KC_SCLN, KC_RSFT)
 // redo ctrl + y
-AH_SINGLE_TD(y, KC_Y, KC_LCTL)
+//AH_SINGLE_TD(y, KC_Y, KC_LCTL)
 // undo ctrl + z
-AH_SINGLE_TD(z, KC_Z, KC_LCTL)
+//AH_SINGLE_TD(z, KC_Z, KC_LCTL)
 
 // Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SCLN]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_finished_scln, dance_reset_scln),
     [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
-    [TD_Y_REDO]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_finished_y, dance_reset_y),
-    [TD_Z_UNDO]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_finished_z, dance_reset_z)};
+//    [TD_Y_REDO]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_finished_y, dance_reset_y),
+//    [TD_Z_UNDO]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_finished_z, dance_reset_z)
+};
 
 // Send custom strings
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
@@ -115,6 +116,9 @@ uint32_t layer_state_set_user(uint32_t state) {
 #define KC_CTSH MT(MOD_LCTL | MOD_LSFT, KC_PMNS)
 #define KC_CTAL MT(MOD_LCTL | MOD_LALT, KC_CIRC)
 
+#define KC_UNDO LCTL(z)
+#define KC_REDO LCTL(y)
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -124,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      TDKC_ESC,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,SYM_L   ,                          SYM_L   ,TDKC_YR ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_EQL  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_LBRC ,                          KC_RBRC ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,TDKC_SEM,KC_QUOT ,
+     KC_TAB  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_UNDO ,                          KC_REDO ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,TDKC_SEM,KC_QUOT ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT ,TDKC_ZU ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,KC_ADPU ,KC_PGDN ,        KC_HOME ,KC_ADEN ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSBS ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
