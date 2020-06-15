@@ -4,6 +4,7 @@
 extern keymap_config_t keymap_config;
 
 #include "support.h"
+
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
@@ -13,7 +14,20 @@ extern keymap_config_t keymap_config;
 #define _SYMB_EXT 2
 #define _ADJUST 3
 
-enum custom_keycodes { QWERTY = SAFE_RANGE, SYMB, SYMB_EXT, NAV, ADJUST, ASC_SAR, ASC_VERS };
+enum custom_keycodes {
+  QWERTY = SAFE_RANGE,
+  SYMB,
+  SYMB_EXT,
+  ADJUST,
+  ASC_SAR,
+  ASC_VERS,
+  M_AE,
+  M_OE,
+  M_UE,
+  M_ESZ,
+  M_MU,
+  M_EUR
+};
 
 // Tap dance keycodes
 enum tap_dance { TD_ESC_CAPS = 0 };
@@ -24,6 +38,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 };
 
 // Send custom strings
+// For Umlauts etc.: // setxkbmap -option compose:ralt
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (record->event.pressed) {
     switch (keycode) {
@@ -32,6 +47,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         return false;
       case ASC_VERS:
         SEND_STRING(QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_BUILDDATE " : " QMK_VERSION);
+        return false;
+      case M_AE:
+        SEND_STRING(SS_RALT(SS_LSFT("'")) "a");
+        return false;
+      case M_OE:
+        SEND_STRING(SS_RALT(SS_RSFT("'")) "o");
+        return false;
+      case M_UE:
+        SEND_STRING(SS_RALT(SS_RSFT("'")) "u");
+        return false;
+      case M_ESZ:
+        SEND_STRING(SS_RALT("ss"));
+        return false;
+      case M_MU:
+        SEND_STRING(SS_RALT("/u"));
+        return false;
+      case M_EUR:
+        SEND_STRING(SS_RALT("c="));
         return false;
     }
   }
@@ -130,13 +163,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYMB_EXT] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                                            XXXXXXX ,KC_CLEAR,KC_BSPC ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
+     _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                                            XXXXXXX ,KC_CLEAR,KC_BSPC ,XXXXXXX ,M_EUR   ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,KC_REDO ,KC_CUT  ,KC_CPY  ,KC_PST  ,KC_UNDO ,_______ ,                          _______ ,KC_PAST ,KC_KP_7 ,KC_KP_8 ,KC_KP_9 ,KC_CALC ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,KC_CTSH ,KC_ENT  ,KC_SPC  ,KC_BSPC ,KC_DEL  ,_______ ,                          _______ ,KC_PSLS ,KC_KP_4 ,KC_KP_5 ,KC_KP_6 ,KC_PCMM ,KC_PENT ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,KC_CTAL ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______ ,_______ ,        _______ ,_______ ,KC_PMNS ,KC_KP_1 ,KC_KP_2 ,KC_KP_3 ,KC_PDOT ,_______ ,
+     _______ ,KC_CTAL ,M_AE    ,M_OE    ,M_UE    ,M_ESZ   ,_______ ,_______ ,        _______ ,_______ ,KC_PMNS ,KC_KP_1 ,KC_KP_2 ,KC_KP_3 ,KC_PDOT ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______ ,    KC_PPLS ,     KC_KP_0 ,KC_KP_0 ,XXXXXXX ,XXXXXXX
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
