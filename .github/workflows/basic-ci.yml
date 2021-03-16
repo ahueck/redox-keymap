@@ -6,25 +6,18 @@ on:
   pull_request:
 
 jobs:
-  build-and-run-test:
+  build:
     runs-on: ubuntu-20.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    env: 
+      KEYMAP_NAME: ahueck
+      KEYMAP_REPO_HOME: ${{github.workspace}}/ahueck
+      QMK_HOME: ${{github.workspace}}/qmk
+      QMK_KEYMAP_HOME: ${{github.workspace}}/qmk/keyboards/redox/keymaps/
     steps:
-      - name: Environment vars
-        run: |
-          echo "KEYMAP_HOME=$GITHUB_WORKSPACE/ahueck" >> $GITHUB_ENV
-          echo "QMK_HOME=$GITHUB_WORKSPACE/qmk" >> $GITHUB_ENV
-
       - uses: actions/checkout@v2
         with:
-          path: ahueck
-
-      - name: ls ...
-        run: |
-          ls
-          ls ${KEYMAP_HOME}
-          ls ${GITHUB_WORKSPACE}
-          exit 1
+          path: ${{ env.KEYMAP_REPO_HOME }}
 
       - name: Install QMK CLI
         run: python3 -m pip install --user qmk
@@ -33,7 +26,7 @@ jobs:
         run: qmk setup -y -H ${QMK_HOME}
 
       - name: Setup keymap location
-        run: cp -R ${KEYMAP_HOME} ${QMK_HOME}/keyboards/redox/keymaps/
+        run: cp -R ${{ env.KEYMAP_REPO_HOME }} ${{ env.QMK_KEYMAP_HOME }}
 
       - name: Build Redox keymap
-        run: qmk compile -kb redox/rev1 -km ahueck
+        run: qmk compile -kb redox/rev1 -km ${{ env.KEYMAP_NAME }}
