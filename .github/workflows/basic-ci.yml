@@ -12,13 +12,12 @@ jobs:
     steps:
       - name: Environment vars
         run: |
-          echo "KEYMAP_NAME=ahueck" >> $GITHUB_ENV
           echo "KEYMAP_HOME=$GITHUB_WORKSPACE/ahueck" >> $GITHUB_ENV
           echo "QMK_HOME=$GITHUB_WORKSPACE/qmk" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
         with:
-          path: ${KEYMAP_NAME}
+          path: ahueck
 
       - name: ls ...
         run: |
@@ -34,7 +33,7 @@ jobs:
         run: qmk setup -y -H ${QMK_HOME}
 
       - name: Setup keymap location
-        run: cp -R ${KEYMAP_HOME}  ${QMK_HOME}/keyboards/redox/keymaps
+        run: cp -R ${KEYMAP_HOME} ${QMK_HOME}/keyboards/redox/keymaps/
 
       - name: Build Redox keymap
         run: qmk compile -kb redox/rev1 -km ahueck
