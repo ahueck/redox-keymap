@@ -4,6 +4,8 @@ on:
   push:
     branches: [ master, devel ]
   pull_request:
+  schedule:
+    - cron:  '0 10 * * 1'
 
 jobs:
   build:
@@ -18,12 +20,12 @@ jobs:
         run: python3 -m pip install --user qmk
 
       - name: Setup QMK
-        run: qmk setup -y -H ${QMK_HOME}
+        run: qmk setup -y -H ${{env.QMK_HOME}}
 
       - name: Checkout keymap
         uses: actions/checkout@v2
         with:
-          path: ${{ env.QMK_KEYMAP_HOME }}
+          path: ${{env.QMK_KEYMAP_HOME}}
 
       - name: Build Redox keymap
-        run: qmk compile -kb redox/rev1 -km ${{ env.KEYMAP_NAME }}
+        run: qmk compile -kb redox/rev1 -km ${{env.KEYMAP_NAME}}
