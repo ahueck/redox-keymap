@@ -3,7 +3,7 @@
 Further information for the keyboard specifics: [Redox repository](https://github.com/mattdibi/redox-keyboard) and [Redox qmk firmware](https://github.com/qmk/qmk_firmware/tree/master/keyboards/redox)
 
 ## Flashing the device
-Note: new qmk CLI; not fully tested w.r.t. flashing; see also (Github CI)[.github/workflows/basic-ci.yml]
+Note: Not fully tested w.r.t. flashing; see also [Github CI](.github/workflows/basic-ci.yml)
 
 Always do the flashing procedure for both sides.
 Reset button (pinhole) is on the underside of each half, respectively.
@@ -23,14 +23,11 @@ Reset button (pinhole) is on the underside of each half, respectively.
 [Online config](https://config.qmk.fm/#/redox/rev1/LAYOUT)
  
 ##### Key related
-[Keycodes basic](https://beta.docs.qmk.fm/using-qmk/simple-keycodes)
-
-[Keycodes advanced](https://beta.docs.qmk.fm/using-qmk/advanced-keycodes)
-
-[Software features](https://beta.docs.qmk.fm/using-qmk/software-features)
+- [Keycodes basic](https://beta.docs.qmk.fm/using-qmk/simple-keycodes) and [Keycodes advanced](https://beta.docs.qmk.fm/using-qmk/advanced-keycodes)
+- [Software features](https://beta.docs.qmk.fm/using-qmk/software-features)
 
 ### 4. Flash
-    1. Modem manager may need special handling, see [QMK FAQ](https://beta.docs.qmk.fm/faqs/faq_build), e.g., `sudo systemctl stop ModemManager.service`
+    1. Modem manager may need special handling, see https://beta.docs.qmk.fm/faqs/faq_build, e.g., `sudo systemctl stop ModemManager.service`
     2. qmk flash -kb redox/rev1 -km ahueck
 
 
