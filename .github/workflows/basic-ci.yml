@@ -12,12 +12,13 @@ jobs:
     steps:
       - name: Environment vars
         run: |
+          echo "KEYMAP_NAME=ahueck" >> $GITHUB_ENV
           echo "KEYMAP_HOME=$GITHUB_WORKSPACE/ahueck" >> $GITHUB_ENV
           echo "QMK_HOME=$GITHUB_WORKSPACE/qmk" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
         with:
-          path: ${KEYMAP_HOME}
+          path: ${KEYMAP_NAME}
 
       - name: Install QMK CLI
         run: python3 -m pip install --user qmk
