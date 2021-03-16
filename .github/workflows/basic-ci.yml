@@ -1,0 +1,31 @@
+name: Keymap-CI
+
+on:
+  push:
+    branches: [ master, devel ]
+  pull_request:
+  schedule:
+    - cron:  '0 10 * * 1'
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    env: 
+      KEYMAP_NAME: ahueck
+      QMK_HOME: ${{github.workspace}}/qmk
+      QMK_KEYMAP_HOME: ${{github.workspace}}/qmk/keyboards/redox/keymaps/ahueck
+    steps:
+      - name: Install QMK CLI
+        run: python3 -m pip install --user qmk
+
+      - name: Setup QMK
+        run: qmk setup -y -H ${{env.QMK_HOME}}
+
+      - name: Checkout keymap
+        uses: actions/checkout@v2
+        with:
+          path: ${{env.QMK_KEYMAP_HOME}}
+
+      - name: Build Redox keymap
+        run: qmk compile -kb redox/rev1 -km ${{env.KEYMAP_NAME}}
