@@ -11,22 +11,19 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     env: 
       KEYMAP_NAME: ahueck
-      KEYMAP_REPO_HOME: ${{github.workspace}}/ahueck
       QMK_HOME: ${{github.workspace}}/qmk
       QMK_KEYMAP_HOME: ${{github.workspace}}/qmk/keyboards/redox/keymaps/
     steps:
-      - uses: actions/checkout@v2
-        with:
-          path: ${{ env.KEYMAP_REPO_HOME }}
-
       - name: Install QMK CLI
         run: python3 -m pip install --user qmk
 
       - name: Setup QMK
         run: qmk setup -y -H ${QMK_HOME}
 
-      - name: Setup keymap location
-        run: cp -R ${{ env.KEYMAP_REPO_HOME }} ${{ env.QMK_KEYMAP_HOME }}
+      - name: Checkout keymap
+        uses: actions/checkout@v2
+        with:
+          path: ${{ env.QMK_KEYMAP_HOME }}
 
       - name: Build Redox keymap
         run: qmk compile -kb redox/rev1 -km ${{ env.KEYMAP_NAME }}
