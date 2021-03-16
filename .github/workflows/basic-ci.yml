@@ -20,6 +20,13 @@ jobs:
         with:
           path: ${KEYMAP_NAME}
 
+      - name: ls ...
+        run: |
+          ls
+          ls ${KEYMAP_HOME}
+          ls ${GITHUB_WORKSPACE}
+          exit 1
+
       - name: Install QMK CLI
         run: python3 -m pip install --user qmk
 
