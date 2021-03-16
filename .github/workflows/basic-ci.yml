@@ -16,7 +16,8 @@ jobs:
           echo "QMK_HOME=$GITHUB_WORKSPACE/qmk" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
-        path: ${KEYMAP_HOME}
+        with:
+          path: ${KEYMAP_HOME}
 
       - name: Install QMK CLI
         run: python3 -m pip install --user qmk
