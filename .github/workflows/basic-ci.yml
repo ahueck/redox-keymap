@@ -12,7 +12,7 @@ jobs:
     env: 
       KEYMAP_NAME: ahueck
       QMK_HOME: ${{github.workspace}}/qmk
-      QMK_KEYMAP_HOME: ${{github.workspace}}/qmk/keyboards/redox/keymaps/
+      QMK_KEYMAP_HOME: ${{github.workspace}}/qmk/keyboards/redox/keymaps/ahueck
     steps:
       - name: Install QMK CLI
         run: python3 -m pip install --user qmk
