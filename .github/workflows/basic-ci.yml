@@ -16,6 +16,9 @@ jobs:
       QMK_HOME: ${{github.workspace}}/qmk
       QMK_KEYMAP_HOME: ${{github.workspace}}/qmk/keyboards/redox/keymaps/ahueck
     steps:
+      - name: Append PATH environment 
+        run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
+      
       - name: Install QMK CLI
         run: python3 -m pip install --user qmk
 
