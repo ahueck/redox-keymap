@@ -41,6 +41,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // For Umlauts etc.: // setxkbmap -option compose:ralt
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (record->event.pressed) {
+    const uint8_t mods = get_mods();
+
     switch (keycode) {
       case ASC_SAR:
         AH_SEND_KEY_OR_SHIFT_THEN("->", "=>")

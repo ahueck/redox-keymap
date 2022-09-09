@@ -24,13 +24,14 @@
   rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT); \
   rgblight_sethsv_noeeprom(COLOR);
 
-#define AH_SEND_KEY_OR_SHIFT_THEN(key, key_then) \
-  if (record->event.pressed) {                   \
-    if (get_mods() & MOD_MASK_SHIFT) {           \
-      SEND_STRING((key_then));                   \
-    } else {                                     \
-      SEND_STRING((key));                        \
-    }                                            \
+#define AH_SEND_KEY_OR_SHIFT_THEN(key, key_then)      \
+  if ((mods | get_oneshot_mods()) & MOD_MASK_SHIFT) { \
+    del_mods(MOD_MASK_SHIFT);                         \
+    del_oneshot_mods(MOD_MASK_SHIFT);                 \
+    SEND_STRING((key_then));                          \
+    set_mods(mods);                                   \
+  } else {                                            \
+    SEND_STRING((key));                               \
   }
 
 #endif
