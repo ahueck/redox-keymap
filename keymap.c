@@ -106,8 +106,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #define KC_SYEEN LT(_SYMB_EXT, KC_ENT)  // ext. symbol layer or enter
 #define KC_SYEDE LT(_SYMB_EXT, KC_DEL)  // ext. symbol layer or delete
 
-#define KC_ALAS LALT_T(KC_PAST)
-#define KC_CTPL LCTL_T(KC_PSLS)
 
 #define KC_RSBS RSFT_T(KC_BSLS)
 
@@ -116,7 +114,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 #define TDKC_ESC TD(TD_ESC_CAPS)
 
-#define KC_CMDB LGUI_T(KC_GRV)
 #define KC_CTSP LCTL(KC_SPC)
 #define KC_CTQU RCTL_T(KC_QUOT)
 
@@ -125,8 +122,10 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 #define KC_CTME MT(MOD_LCTL | MOD_LGUI, KC_TILD)
 #define KC_CTSH MT(MOD_LCTL | MOD_LSFT, KC_PMNS)
-#define KC_CTAL MT(MOD_LCTL | MOD_LALT, KC_CIRC)
-#define KC_ALMI MT(MOD_LALT, KC_MINS)
+#define KC_CTAL MT(MOD_LCTL | MOD_LALT, KC_PPLS)
+
+#define OC_CTSH OSM(MOD_LCTL | MOD_LSFT)
+#define OC_CTAL OSM(MOD_LCTL | MOD_LALT)
 
 #define KC_UNDO LCTL(KC_Z)
 #define KC_REDO LCTL(KC_Y)
@@ -147,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,KC_ADPU ,KC_PGDN ,        KC_HOME ,KC_ADEN ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSBS ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     KC_LGUI ,KC_PPLS ,KC_PMNS ,KC_ALAS ,     KC_LCTL ,    KC_SYBS ,KC_SYEDE,        KC_SYEEN,KC_SYSP ,    KC_RALT ,     KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT 
+     KC_LGUI ,OC_CTSH ,OC_CTAL ,KC_LALT ,     KC_LCTL ,    KC_SYBS ,KC_SYEDE,        KC_SYEEN,KC_SYSP ,    KC_RALT ,     KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 

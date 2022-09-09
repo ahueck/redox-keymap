@@ -33,5 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
 
-// tap dance delay
+// Tap dance delay
 #define TAPPING_TERM 200
+
+// One shot toggle tap count
+#define ONESHOT_TAP_TOGGLE 3
