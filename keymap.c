@@ -43,7 +43,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (record->event.pressed) {
     switch (keycode) {
       case ASC_SAR:
-        SEND_STRING("->");
+        AH_SEND_KEY_OR_SHIFT_THEN("->", "=>")
         return false;
       case ASC_VERS:
         SEND_STRING(QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_BUILDDATE " : " QMK_VERSION);
