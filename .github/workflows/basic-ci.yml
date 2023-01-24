@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Format source code
         run: |
@@ -24,11 +24,12 @@ jobs:
 
   build:
     runs-on: ubuntu-20.04
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
     env: 
       KEYMAP_NAME: ahueck
       QMK_HOME: ${{github.workspace}}/qmk
       QMK_KEYMAP_HOME: ${{github.workspace}}/qmk/keyboards/redox/keymaps/ahueck
+
     steps:
       - name: Append PATH environment 
         run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
@@ -40,7 +41,7 @@ jobs:
         run: qmk setup -y -H ${{env.QMK_HOME}}
 
       - name: Checkout keymap
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: ${{env.QMK_KEYMAP_HOME}}
 
