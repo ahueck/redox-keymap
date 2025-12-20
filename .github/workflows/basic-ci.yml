@@ -62,4 +62,4 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: firmware
-          path: ${{ env.QMK_HOME }}/redox_rev1_${{ env.KEYMAP_NAME }}.hex
+          path: ${{ env.QMK_HOME }}/redox_rev1_base_${{ env.KEYMAP_NAME }}.hex
