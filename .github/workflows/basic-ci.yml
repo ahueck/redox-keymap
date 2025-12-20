@@ -57,3 +57,9 @@ jobs:
 
       - name: Build Redox keymap
         run: qmk compile -kb redox/rev1 -km ${{ env.KEYMAP_NAME }}
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: firmware
+          path: ${{ env.QMK_HOME }}/redox_rev1_base_${{ env.KEYMAP_NAME }}.hex
