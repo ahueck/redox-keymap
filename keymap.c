@@ -50,7 +50,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         AH_SEND_KEY_OR_SHIFT_THEN("->", "=>")
         return false;
       case ASC_VERS:
-        SEND_STRING(QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_BUILDDATE " : " QMK_VERSION);
+        SEND_STRING(QMK_KEYMAP " @ " QMK_BUILDDATE " : " QMK_VERSION);
         return false;
       case M_AE:
         SEND_STRING(SS_RALT(SS_LSFT("'")) "a");
@@ -139,6 +139,21 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #define TO_BASE TO(_QWERTY)
 #define TO_STD TO(_STD)
 
+// Left-hand home row mods
+#define HOME_A LGUI_T(KC_A)
+#define HOME_S LALT_T(KC_S)
+#define HOME_D LSFT_T(KC_D)
+#define HOME_F LCTL_T(KC_F)
+
+// Right-hand home row mods
+#define HOME_J RCTL_T(KC_J)
+#define HOME_K RSFT_T(KC_K)
+#define HOME_L LALT_T(KC_L)
+#define HOME_SCLN RGUI_T(KC_SCLN)
+
+#define KC_HS LT(_SYMB, KC_H)   // symbol layer or space
+#define KC_GS LT(_SYMB, KC_G)  // symbol layer or backspace
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -148,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,KC_CPY  ,                          KC_PSCR ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_EQL  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_UNDO ,                          KC_REDO ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_CTQU ,
+     KC_TAB  , HOME_A , HOME_S , HOME_D , HOME_F ,  KC_GS ,KC_UNDO ,                          KC_REDO ,KC_HS   , HOME_J , HOME_K , HOME_L ,HOME_SCLN,KC_CTQU,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,KC_ADPU ,KC_PGDN ,        KC_HOME ,KC_ADEN ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSBS ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
@@ -213,4 +228,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 
 };
+
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = 
+    LAYOUT(
+        // Left Side                                           // Right Side
+        'L', 'L', 'L', 'L', 'L', 'L',                          'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L', 'L',                'R', 'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L', 'L',                'R', 'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L',       'R', 'R','R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L',      'L', 'L', 'L',       'R', 'R',     'R', 'R', 'R', 'R', 'R'
+    );
 // clang-format on

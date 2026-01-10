@@ -1,9 +1,9 @@
-# The ahueck keymap for Redox/rev1 &middot; ![](https://github.com/ahueck/redox-keymap/workflows/Keymap-CI/badge.svg?branch=master)
+# The ahueck keymap for Redox/rev1 &middot; ![](https://github.com/ahueck/redox-keymap/workflows/Keymap-CI/badge.svg)
 
 Further information for the keyboard specifics: [Redox repository](https://github.com/mattdibi/redox-keyboard) and [Redox qmk firmware](https://github.com/qmk/qmk_firmware/tree/master/keyboards/redox)
 
 ## Flashing the device
-Note: Not fully tested w.r.t. flashing; see also [Github CI](.github/workflows/basic-ci.yml)
+See also [Github CI](.github/workflows/basic-ci.yml)
 
 Always do the flashing procedure for both sides.
 Reset button (pinhole) is on the underside of each half, respectively.
@@ -37,7 +37,7 @@ Reset button (pinhole) is on the underside of each half, respectively.
 Always do the flashing procedure for both sides.
 Reset button (pinhole) is on the underside of each half, respectively.
 
-### Pre-requisites 
+### Pre-requisites
     - git clone --recurse-submodules https://github.com/qmk/qmk_firmware.git
     - cd qmk_firmware
     - util/qmk_install.sh
