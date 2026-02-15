@@ -151,7 +151,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #define HOME_L RALT_T(KC_L)
 #define HOME_SCLN RGUI_T(KC_SCLN)
 
-#define KC_HS LT(_SYMB, KC_H)   // symbol layer or space
+#define KC_HS LT(_SYMB, KC_H)  // symbol layer or space
 #define KC_GS LT(_SYMB, KC_G)  // symbol layer or backspace
 
 // clang-format off
