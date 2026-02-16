@@ -148,7 +148,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // Right-hand home row mods
 #define HOME_J RCTL_T(KC_J)
 #define HOME_K RSFT_T(KC_K)
-#define HOME_L RALT_T(KC_L)
+#define HOME_L LALT_T(KC_L)
 #define HOME_SCLN RGUI_T(KC_SCLN)
 
 #define KC_HS LT(_SYMB, KC_H)  // symbol layer or space
