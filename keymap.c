@@ -31,12 +31,19 @@ enum custom_keycodes {
   M_EUR
 };
 
-// Tap dance keycodes
-enum tap_dance { TD_ESC_CAPS = 0 };
+#ifdef AH_TAP_DANCE
+  // Tap dance keycodes
+  enum tap_dance { TD_ESC_CAPS = 0 };
 
-// Tap Dance Definitions
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
+  // Tap Dance Definitions
+  tap_dance_action_t tap_dance_actions[] = {
+      [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
+  };
+#endif
+
+const uint16_t PROGMEM test_combo1[] = {KC_F, KC_D, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(test_combo1, KC_ESC),
 };
 
 // Send custom strings
@@ -50,7 +57,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         AH_SEND_KEY_OR_SHIFT_THEN("->", "=>")
         return false;
       case ASC_VERS:
-        SEND_STRING(QMK_KEYMAP " @ " QMK_BUILDDATE " : " QMK_VERSION);
+        SEND_STRING(QMK_BUILDDATE ":" QMK_VERSION);
         return false;
       case M_AE:
         SEND_STRING(SS_RALT(SS_LSFT("'")) "a");
@@ -179,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,KC_CTSH ,KC_UNDS ,KC_EQL  ,KC_LCBR ,KC_RCBR ,_______ ,                          _______ ,KC_P    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,KC_CTAL ,KC_AMPR ,KC_ASTR ,KC_LBRC ,KC_RBRC ,_______ ,_______ ,        _______ ,_______ ,KC_CTSP ,ASC_SAR ,_______ ,_______ ,_______ ,_______ ,
+     _______ ,KC_CTAL ,KC_AMPR ,KC_ASTR ,KC_LBRC ,KC_RBRC ,_______ ,_______ ,        _______ ,_______ ,KC_CTSP ,ASC_SAR ,SELWORD ,SELWBAK ,SELLINE ,SELLUP ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______ ,    KC_RCTL ,     KC_VOLD ,KC_VOLU ,KC_VOLM ,KC_CALC 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
