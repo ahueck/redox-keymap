@@ -32,18 +32,18 @@ enum custom_keycodes {
 };
 
 #ifdef AH_TAP_DANCE
-  // Tap dance keycodes
-  enum tap_dance { TD_ESC_CAPS = 0 };
+// Tap dance keycodes
+enum tap_dance { TD_ESC_CAPS = 0 };
 
-  // Tap Dance Definitions
-  tap_dance_action_t tap_dance_actions[] = {
-      [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
-  };
+// Tap Dance Definitions
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
+};
 #endif
 
-const uint16_t PROGMEM test_combo1[] = {KC_F, KC_D, COMBO_END};
-combo_t key_combos[] = {
-    COMBO(test_combo1, KC_ESC),
+const uint16_t PROGMEM esc_combo[] = {KC_F, KC_D, COMBO_END};
+combo_t key_combos[]               = {
+    COMBO(esc_combo, KC_ESC),
 };
 
 // Send custom strings
@@ -155,7 +155,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // Right-hand home row mods
 #define HOME_J RCTL_T(KC_J)
 #define HOME_K RSFT_T(KC_K)
-#define HOME_L RALT_T(KC_L)
+#define HOME_L LALT_T(KC_L)
 #define HOME_SCLN RGUI_T(KC_SCLN)
 
 #define KC_HS LT(_SYMB, KC_H)  // symbol layer or space
@@ -214,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,TO_STD  ,                          XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,DT_PRNT ,DT_UP   ,DT_DOWN ,ASC_VERS,XXXXXXX ,_______ ,XXXXXXX ,        XXXXXXX ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
+     XXXXXXX ,CM_ON   ,CM_OFF  ,CM_TOGG ,ASC_VERS,XXXXXXX ,_______ ,XXXXXXX ,        XXXXXXX ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,DT_PRNT ,DT_UP   ,DT_DOWN ,     XXXXXXX ,    XXXXXXX ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,    XXXXXXX ,     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
@@ -236,13 +236,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = 
+const char PROGMEM chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] = 
     LAYOUT(
         // Left Side                                           // Right Side
         'L', 'L', 'L', 'L', 'L', 'L',                          'R', 'R', 'R', 'R', 'R', 'R',
         'L', 'L', 'L', 'L', 'L', 'L', 'L',                'R', 'R', 'R', 'R', 'R', 'R', 'R',
         'L', 'L', 'L', 'L', 'L', 'L', 'L',                'R', 'R', 'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L',       'R', 'R','R', 'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L',      'L', 'L', 'L',       'R', 'R',     'R', 'R', 'R', 'R', 'R'
+        'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L',      'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L',      'L', 'L', 'L',      'R', 'R', 'R',      'R', 'R', 'R', 'R'
     );
 // clang-format on

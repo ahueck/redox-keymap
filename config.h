@@ -44,3 +44,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CHORDAL_HOLD
 #define PERMISSIVE_HOLD
 #define SPECULATIVE_HOLD
+#define EXTRA_SHORT_COMBOS
+#define COMBO_ONLY_FROM_LAYER 0
