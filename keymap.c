@@ -41,11 +41,6 @@ tap_dance_action_t tap_dance_actions[] = {
 };
 #endif
 
-const uint16_t PROGMEM esc_combo[] = {KC_F, KC_D, COMBO_END};
-combo_t key_combos[]               = {
-    COMBO(esc_combo, KC_ESC),
-};
-
 // Send custom strings
 // For Umlauts etc.: // setxkbmap -option compose:ralt
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
@@ -246,3 +241,11 @@ const char PROGMEM chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] =
         'L', 'L', 'L', 'L',      'L', 'L', 'L',      'R', 'R', 'R',      'R', 'R', 'R', 'R'
     );
 // clang-format on
+
+enum combos {
+  ER_ESC,
+};
+const uint16_t PROGMEM esc_combo[] = {KC_E, KC_R, COMBO_END};
+combo_t key_combos[]               = {
+    [ER_ESC] = COMBO(esc_combo, KC_ESC),
+};
