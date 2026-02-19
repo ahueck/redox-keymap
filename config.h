@@ -33,6 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
 
+#define LAYER_STATE_8BIT
+
 // One shot toggle tap count
 #define ONESHOT_TAP_TOGGLE 3
 
@@ -44,3 +46,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CHORDAL_HOLD
 #define PERMISSIVE_HOLD
 #define SPECULATIVE_HOLD
+#define EXTRA_SHORT_COMBOS
+#define COMBO_ONLY_FROM_LAYER 0

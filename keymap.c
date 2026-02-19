@@ -31,6 +31,7 @@ enum custom_keycodes {
   M_EUR
 };
 
+#ifdef AH_TAP_DANCE
 // Tap dance keycodes
 enum tap_dance { TD_ESC_CAPS = 0 };
 
@@ -38,6 +39,7 @@ enum tap_dance { TD_ESC_CAPS = 0 };
 tap_dance_action_t tap_dance_actions[] = {
     [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
 };
+#endif
 
 // Send custom strings
 // For Umlauts etc.: // setxkbmap -option compose:ralt
@@ -50,7 +52,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         AH_SEND_KEY_OR_SHIFT_THEN("->", "=>")
         return false;
       case ASC_VERS:
-        SEND_STRING(QMK_KEYMAP " @ " QMK_BUILDDATE " : " QMK_VERSION);
+        SEND_STRING(QMK_BUILDDATE ":" QMK_VERSION);
         return false;
       case M_AE:
         SEND_STRING(SS_RALT(SS_LSFT("'")) "a");
@@ -179,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,KC_CTSH ,KC_UNDS ,KC_EQL  ,KC_LCBR ,KC_RCBR ,_______ ,                          _______ ,KC_P    ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,KC_CTAL ,KC_AMPR ,KC_ASTR ,KC_LBRC ,KC_RBRC ,_______ ,_______ ,        _______ ,_______ ,KC_CTSP ,ASC_SAR ,_______ ,_______ ,_______ ,_______ ,
+     _______ ,KC_CTAL ,KC_AMPR ,KC_ASTR ,KC_LBRC ,KC_RBRC ,_______ ,_______ ,        _______ ,_______ ,KC_CTSP ,ASC_SAR ,SELWORD ,SELWBAK ,SELLINE ,SELLUP ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______ ,    KC_RCTL ,     KC_VOLD ,KC_VOLU ,KC_VOLM ,KC_CALC 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
@@ -207,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,TO_STD  ,                          XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,DT_PRNT ,DT_UP   ,DT_DOWN ,ASC_VERS,XXXXXXX ,_______ ,XXXXXXX ,        XXXXXXX ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
+     XXXXXXX ,CM_ON   ,CM_OFF  ,CM_TOGG ,ASC_VERS,XXXXXXX ,_______ ,XXXXXXX ,        XXXXXXX ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,DT_PRNT ,DT_UP   ,DT_DOWN ,     XXXXXXX ,    XXXXXXX ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,    XXXXXXX ,     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
@@ -229,13 +231,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = 
+const char PROGMEM chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] = 
     LAYOUT(
         // Left Side                                           // Right Side
         'L', 'L', 'L', 'L', 'L', 'L',                          'R', 'R', 'R', 'R', 'R', 'R',
         'L', 'L', 'L', 'L', 'L', 'L', 'L',                'R', 'R', 'R', 'R', 'R', 'R', 'R',
         'L', 'L', 'L', 'L', 'L', 'L', 'L',                'R', 'R', 'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L',       'R', 'R','R', 'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L',      'L', 'L', 'L',       'R', 'R',     'R', 'R', 'R', 'R', 'R'
+        'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L',      'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L',      'L', 'L', 'L',      'R', 'R', 'R',      'R', 'R', 'R', 'R'
     );
 // clang-format on
+
+enum combos {
+  ER_ESC,
+};
+const uint16_t PROGMEM esc_combo[] = {KC_E, KC_R, COMBO_END};
+combo_t key_combos[]               = {
+    [ER_ESC] = COMBO(esc_combo, KC_ESC),
+};

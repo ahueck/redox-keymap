@@ -59,6 +59,13 @@ jobs:
       - name: Setup QMK
         run: qmk setup -y -H ${{ env.QMK_HOME }}
 
+      - name: QMK modules
+        working-directory: ${{ env.QMK_HOME }}
+        run: |
+          mkdir -p modules
+          git submodule add https://github.com/getreuer/qmk-modules.git modules/getreuer
+          git submodule update --init --recursive
+
       - name: Checkout keymap
         uses: actions/checkout@v6
         with:
